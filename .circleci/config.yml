@@ -23,11 +23,11 @@ jobs:
     steps:
       - checkout
       - gcp-gcr/gcr-auth:
-          gcloud-service-key: ${GCLOUD-SERVICE-KEY}
-          google-compute-zone: ${GOOGLE-COMPUTE-ZONE}
-          google-project-id: ${GOOGLE-PROJECT-ID}
+          gcloud-service-key: <<parameters.gcloud-service-key>>
+          google-compute-zone: <<parameters.google-compute-zone>>
+          google-project-id: <<parameters.google-project-id>>
       - gcp-gcr/build-image:
-          google-project-id: ${GOOGLE-PROJECT-ID}
+          google-project-id: <<parameters.google-project-id>>
           image: test
           registry-url: us.gcr.io
           tag: ${CIRCLE_BUILD_NUM}
