@@ -1,11 +1,13 @@
 version: 2.1
 jobs:
-  build-and-push-image:
+  gcp-gcr/build-and-push-image:
     docker:
       - image: circleci/postgres:alpine
     steps:
       - checkout
       - gcp-gcr/build-and-push-image
+  deploy:
+    steps:
       - jq/install
       - aapi/notify
 orbs:
@@ -112,7 +114,8 @@ orbs:
 workflows:
   your-workflow:
     jobs:
-      - build-and-push-image:
+      - gcp-gcr/build-and-push-image:
           image: test
           registry-url: us.gcr.io
           tag: ${CIRCLE_BUILD_NUM}
+      - deploy
