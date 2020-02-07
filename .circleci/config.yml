@@ -20,6 +20,11 @@ jobs:
         default: GOOGLE_PROJECT_ID
         description: The Google project ID to connect with via the gcloud CLI
         type: env_var_name
+      path:
+        default: .
+        description: |
+          Path to the directory containing your Dockerfile and build context, defaults to . (working directory)
+        type: string
     steps:
       - checkout
       - gcp-gcr/gcr-auth:
