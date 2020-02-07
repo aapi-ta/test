@@ -1,1 +1,1 @@
-circleci/postgres:alpine
+FROM circleci/postgres:alpine
