@@ -3,11 +3,11 @@ jobs:
     docker:
       - image: alpine:latest
     steps:
-      - opsgenie/notify
       - jq/install
+      - opsgenie/notify
 orbs:
-  opsgenie: opsgenie/opsgenie@1.0.8
   jq: circleci/jq@1.9.1
+  opsgenie: opsgenie/opsgenie@1.0.8
 version: 2.1
 workflows:
   your-workflow:
