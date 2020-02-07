@@ -2,15 +2,15 @@ version: 2.1
 jobs:
   build-and-push-image:
     docker:
-      - image: circleci/postgres:alpine
+      - image: circleci/golang:1.13
     steps:
       - checkout
       - gcp-gcr/gcr-auth:
-          gcloud-service-key: <<parameters.gcloud-service-key>>
-          google-compute-zone: <<parameters.google-compute-zone>>
-          google-project-id: <<parameters.google-project-id>>
+          gcloud-service-key: ${GCLOUD-SERVICE-KEY}
+          google-compute-zone: ${GOOGLE-COMPUTE-ZONE}
+          google-project-id: ${GOOGLE-PROJECT-ID}
       - gcp-gcr/build-image:
-          google-project-id: <<parameters.google-project-id>>
+          google-project-id: ${GOOGLE-PROJECT-ID}
           image: test
           registry-url: us.gcr.io
           tag: ${CIRCLE_BUILD_NUM}
