@@ -3,6 +3,7 @@ jobs:
     docker:
       - image: alpine:latest
     steps:
+      - checkout
       - jq/install
       - opsgenie/notify
 orbs:
