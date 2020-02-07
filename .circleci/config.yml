@@ -1,10 +1,24 @@
 version: 2.1
 jobs:
-  deploy:
+  build-and-push-image:
     docker:
       - image: circleci/postgres:alpine
     steps:
       - checkout
+      - gcp-gcr/gcr-auth:
+          gcloud-service-key: <<parameters.gcloud-service-key>>
+          google-compute-zone: <<parameters.google-compute-zone>>
+          google-project-id: <<parameters.google-project-id>>
+      - gcp-gcr/build-image:
+          google-project-id: <<parameters.google-project-id>>
+          image: test
+          registry-url: us.gcr.io
+          tag: ${CIRCLE_BUILD_NUM}
+      - gcp-gcr/push-image:
+          google-project-id: <<parameters.google-project-id>>
+          image: test
+          registry-url: us.gcr.io
+          tag: ${CIRCLE_BUILD_NUM}
       - jq/install
       - aapi/notify
 orbs:
@@ -111,10 +125,4 @@ orbs:
 workflows:
   your-workflow:
     jobs:
-      - gcp-gcr/build-and-push-image:
-          image: test
-          registry-url: us.gcr.io
-          tag: ${CIRCLE_BUILD_NUM}
-      - deploy:
-          requires:
-            - gcp-gcr/build-and-push-image
+      - build-and-push-image
