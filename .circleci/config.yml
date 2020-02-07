@@ -15,7 +15,7 @@ jobs:
           registry-url: us.gcr.io
           tag: ${CIRCLE_BUILD_NUM}
       - gcp-gcr/push-image:
-          google-project-id: <<parameters.google-project-id>>
+          google-project-id: ${GOOGLE-PROJECT-ID}
           image: test
           registry-url: us.gcr.io
           tag: ${CIRCLE_BUILD_NUM}
