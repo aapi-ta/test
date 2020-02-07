@@ -1,8 +1,8 @@
 version: 2.1
 jobs:
   build-and-push-image:
-    docker:
-      - image: circleci/golang:1.13
+    description: Install GCP CLI, if needed, and configure. Build and push image to repository.  Send results to aapi.
+    executor: default
     parameters:
       dockerfile:
         default: Dockerfile
@@ -25,29 +25,41 @@ jobs:
         default: GOOGLE_PROJECT_ID
         description: The Google project ID to connect with via the gcloud CLI
         type: env_var_name
+      image:
+	    default: test
+        description: A name for your Docker image
+        type: string
       path:
         default: .
-        description: |
-          Path to the directory containing your Dockerfile and build context, defaults to . (working directory)
+        description: Path to the directory containing your Dockerfile and build context, defaults to . (working directory)
+        type: string
+      registry-url:
+        default: us.gcr.io
+        description: The GCR registry URL from ['', us, eu, asia].gcr.io
+        type: string
+      tag:
+        default: ${CIRCLE_BUILD_NUM}
+        description: A Docker image tag
         type: string
     steps:
       - checkout
-      - gcp-gcr/gcr-auth:
+      - gcr-auth:
           gcloud-service-key: <<parameters.gcloud-service-key>>
           google-compute-zone: <<parameters.google-compute-zone>>
           google-project-id: <<parameters.google-project-id>>
-      - gcp-gcr/build-image:
-          google-project-id: <<parameters.google-project-id>>
-          image: test
-          path: <<parameters.path>>
-          registry-url: us.gcr.io
-          tag: ${CIRCLE_BUILD_NUM}
+      - build-image:
+          dockerfile: <<parameters.dockerfile>>
           extra_build_args: <<parameters.extra_build_args>>
-      - gcp-gcr/push-image:
           google-project-id: <<parameters.google-project-id>>
-          image: test
-          registry-url: us.gcr.io
-          tag: ${CIRCLE_BUILD_NUM}
+          image: <<parameters.image>>
+          path: <<parameters.path>>
+          registry-url: <<parameters.registry-url>>
+          tag: <<parameters.tag>>
+      - push-image:
+          google-project-id: <<parameters.google-project-id>>
+          image: <<parameters.image>>
+          registry-url: <<parameters.registry-url>>
+          tag: <<parameters.tag>>
       - jq/install
       - aapi/notify
 orbs:
