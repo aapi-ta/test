@@ -5,9 +5,7 @@ jobs:
       - image: circleci/postgres:alpine
     steps:
       - checkout
-      - gcr-auth
-      - build-image
-      - push-image
+      - gcp-gcr/build-and-push-image
       - jq/install
       - aapi/notify
 orbs:
@@ -114,7 +112,7 @@ orbs:
 workflows:
   your-workflow:
     jobs:
-      - gcp-gcr/build-and-push-image:
+      - build-and-push-image:
           image: test
           registry-url: us.gcr.io
           tag: ${CIRCLE_BUILD_NUM}
