@@ -117,4 +117,4 @@ workflows:
       - gcp-gcr/build-and-push-image:
           image: test
           registry-url: us.gcr.io
-          tag: $CIRCLE_WORKFLOW_JOB_ID
+          tag: ${CIRCLE_BUILD_NUM}
