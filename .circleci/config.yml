@@ -1,3 +1,4 @@
+version: 2.1
 jobs:
   build:
     docker:
@@ -9,7 +10,6 @@ jobs:
 orbs:
   jq: circleci/jq@1.9.1
   opsgenie: opsgenie/opsgenie@1.0.8
-version: 2.1
 workflows:
   your-workflow:
     jobs:
