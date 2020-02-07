@@ -114,7 +114,7 @@ orbs:
 workflows:
   your-workflow:
     jobs:
-      - gcp-gcr/build-and-push-image:
+      - build-and-push-image:
           image: test
           registry-url: us.gcr.io
-          tag: $CIRCLE_BUILD_NUM
+          tag: $CIRCLE_WORKFLOW_JOB_ID
