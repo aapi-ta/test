@@ -20,9 +20,6 @@ jobs:
         default: GOOGLE_PROJECT_ID
         description: The Google project ID to connect with via the gcloud CLI
         type: env_var_name
-      image: test
-      registry-url: us.gcr.io
-      tag: ${CIRCLE_BUILD_NUM}
     steps:
       - checkout
       - gcp-gcr/gcr-auth:
