@@ -34,6 +34,7 @@ jobs:
       - gcp-gcr/build-image:
           google-project-id: <<parameters.google-project-id>>
           image: test
+          path: <<parameters.path>>
           registry-url: us.gcr.io
           tag: ${CIRCLE_BUILD_NUM}
       - gcp-gcr/push-image:
