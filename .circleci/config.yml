@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  "build-and-push-image":
+  buildandpushimage:
     description: Install GCP CLI, if needed, and configure. Build and push image to repository.  Send results to aapi.
     executor: default
     parameters:
@@ -166,7 +166,7 @@ orbs:
 workflows:
   your-workflow:
     jobs:
-      - "build-and-push-image"
+      - buildandpushimage
 executors:
   default:
     description: A debian-based machine executor
