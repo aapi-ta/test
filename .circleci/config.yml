@@ -26,7 +26,7 @@ jobs:
         description: The Google project ID to connect with via the gcloud CLI
         type: env_var_name
       image:
-	    default: test
+        default: test
         description: A name for your Docker image
         type: string
       path:
