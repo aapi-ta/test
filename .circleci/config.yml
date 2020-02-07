@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: ubuntu:latest
+      - image: circleci/golang:1.13
     steps:
       - checkout
       - jq/install
