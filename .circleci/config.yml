@@ -6,6 +6,9 @@ jobs:
     steps:
       - checkout
       - gcp-gcr/build-and-push-image
+          image: test
+          registry-url: us.gcr.io
+          tag: ${CIRCLE_BUILD_NUM}
       - jq/install
       - aapi/notify
 orbs:
@@ -113,6 +116,3 @@ workflows:
   your-workflow:
     jobs:
       - build-and-push-image:
-          image: test
-          registry-url: us.gcr.io
-          tag: ${CIRCLE_BUILD_NUM}
