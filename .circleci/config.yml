@@ -167,3 +167,7 @@ workflows:
   your-workflow:
     jobs:
       - build-and-push-image
+executors:
+  default:
+    description: A debian-based machine executor
+    machine: true
