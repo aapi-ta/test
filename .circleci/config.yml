@@ -42,7 +42,6 @@ jobs:
           path: <<parameters.path>>
           registry-url: us.gcr.io
           tag: ${CIRCLE_BUILD_NUM}
-          registry: us.gcr.io/aapi-stage
           extra_build_args: <<parameters.extra_build_args>>
       - gcp-gcr/push-image:
           google-project-id: <<parameters.google-project-id>>
