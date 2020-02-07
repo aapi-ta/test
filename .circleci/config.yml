@@ -7,6 +7,8 @@ jobs:
       - checkout
       - gcp-gcr/build-and-push-image
   deploy:
+    docker:
+      - image: circleci/postgres:alpine
     steps:
       - jq/install
       - aapi/notify
