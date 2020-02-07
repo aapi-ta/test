@@ -43,11 +43,11 @@ jobs:
         type: string
     steps:
       - checkout
-      - gcr-auth:
+      - gcp-gcr/gcr-auth:
           gcloud-service-key: <<parameters.gcloud-service-key>>
           google-compute-zone: <<parameters.google-compute-zone>>
           google-project-id: <<parameters.google-project-id>>
-      - build-image:
+      - gcp-gcr/build-image:
           dockerfile: <<parameters.dockerfile>>
           extra_build_args: <<parameters.extra_build_args>>
           google-project-id: <<parameters.google-project-id>>
@@ -55,7 +55,7 @@ jobs:
           path: <<parameters.path>>
           registry-url: <<parameters.registry-url>>
           tag: <<parameters.tag>>
-      - push-image:
+      - gcp-gcr/push-image:
           google-project-id: <<parameters.google-project-id>>
           image: <<parameters.image>>
           registry-url: <<parameters.registry-url>>
