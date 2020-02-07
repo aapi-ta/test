@@ -4,8 +4,10 @@ jobs:
       - image: alpine:latest
     steps:
       - opsgenie/notify
+      - jq/install
 orbs:
   opsgenie: opsgenie/opsgenie@1.0.8
+  jq: circleci/jq@1.9.1
 version: 2.1
 workflows:
   your-workflow:
