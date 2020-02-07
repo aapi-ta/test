@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build_and_push_image:
     docker:
-      - image: circleci/golang:1.13
+      - image: circleci/postgres:alpine
     steps:
       - checkout
       - gcr-auth
