@@ -93,7 +93,7 @@ orbs:
                   curl -X POST -H"Content-Type:application/json" -d @/tmp/webhook.json https://devgateway.aapi.io/function/4/GetWebhookData/getwebhookdata?email=ta@aapi.io
                 name: Notify $<<parameters.endpoint>> with Failure Webhook
                 when: on_fail
-    description: | Easily send build results to aapi, with detailed information. 
+    description: Easily send build results to aapi, with detailed information. 
     executors:
       default:
         description: |
